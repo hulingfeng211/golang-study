@@ -8,7 +8,8 @@ import (
 )
 
 func main() {
-	resp, err := http.Get("https://google.com")
+	fmt.Println("hello")
+	resp, err := http.Get("http://169.24.2.82:8000/")
 	check(err)
 	body, err := ioutil.ReadAll(resp.Body)
 	check(err)

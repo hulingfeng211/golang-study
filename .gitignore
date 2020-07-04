@@ -1,4 +1,5 @@
 
 .idea/
 *.[oa]
+001-dockerize-golang/main
 ./001-dockerize-golang/main

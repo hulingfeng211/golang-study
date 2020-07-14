@@ -54,7 +54,7 @@ func main() {
 		if conn, err = impl.InitConnection(wsConn); err != nil {
 			goto ERR
 		}
-		registryConnection(conn)
+		registryConnection(conn) //怎么处理连接和用户之间的关系，定点消息推送
 		//在线连接的维护
 		go func() {
 			for {

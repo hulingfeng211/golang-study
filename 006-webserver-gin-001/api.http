@@ -1,0 +1,7 @@
+# curl -i http://httpbin.org/ip
+GET http://localhost:8080/
+
+###
+
+GET http://localhost:8080/
+

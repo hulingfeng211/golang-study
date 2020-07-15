@@ -2,12 +2,14 @@ package main
 
 import (
 	"fmt"
+	"log"
+
 	"github.com/nacos-group/nacos-sdk-go/clients"
 	"github.com/nacos-group/nacos-sdk-go/common/constant"
 	"github.com/nacos-group/nacos-sdk-go/model"
 	"github.com/nacos-group/nacos-sdk-go/utils"
 	"github.com/nacos-group/nacos-sdk-go/vo"
-	"log"
+	"gopkg.in/yaml.v3"
 )
 
 const (
@@ -95,7 +97,14 @@ func RegisterService() {
 		DataId: DataId,
 		Group:  GROUP})
 
-	fmt.Println(content)
+	//fmt.Println(content)
+
+	m := make(map[interface{}]interface{})
+
+	err = yaml.Unmarshal([]byte(content), &m)
+	if err != nil {
+		log.Fatalf("error: %v", err)
+	}
 
 	configClient.ListenConfig(vo.ConfigParam{
 		DataId: DataId,

@@ -72,6 +72,7 @@ func getAccessToken(appId, appSecret, tenantId, username, password string) (Blad
 	data["scope"] = []string{"all"}
 	data["username"] = []string{username}
 	data["password"] = []string{passwordEncode(password)}
+        fmt.Println(data)
 	client := http.Client{}
 	var req *http.Request
 	req, _ = http.NewRequest("POST", tokenUrl, strings.NewReader(data.Encode()))

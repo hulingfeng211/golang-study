@@ -1,5 +1,16 @@
 # golang 学习项目
 
+- 启动nacos
+
+下载
+[https://github.com/alibaba/nacos/releases/download/1.3.1/nacos-server-1.3.1.zip](https://github.com/alibaba/nacos/releases/download/1.3.1/nacos-server-1.3.1.zip)
+
+启动
+
+```
+C:\Users\15921\Desktop\nacos-server-1.3.1\nacos\bin\startup.cmd
+```
+
 - 设置go中国代理
 ```
 go env -w GO111MODULE=on

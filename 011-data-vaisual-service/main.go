@@ -10,29 +10,15 @@ import (
 	_ "github.com/hulingfeng211/golang-study/011-data-visual-service/docs"
 	swaggerFiles "github.com/swaggo/files"
 	"github.com/swaggo/gin-swagger"
-	"net/http"
-	"strconv"
 	"time"
 )
 
-func mapDetailHandler(c *gin.Context) {
-	mapId := c.Query("id")
-	var visualMap Model.VisualMap
-	if s, err := strconv.Atoi(mapId); err == nil {
-		Database.DB.Where("id=?", s).First(&visualMap)
-		//if err := Database.DB.Find(&visualMap).Error; err != nil {
-		//	log.Fatal(err.Error())
-		//}
-		c.JSON(http.StatusOK, Model.R{Data: visualMap})
-	}
-
-}
 func routeGroup(router *gin.Engine) {
 
 	mapRoute := router.Group("/map")
 	{
 		//mapRoute.GET("/detail",mapDetailHandler)
-		mapRoute.GET("/detail", mapDetailHandler)
+		mapRoute.GET("/detail", Controller.VisualMapDetail)
 		mapRoute.PUT("/save", Controller.CreateVisualMap)
 		mapRoute.POST("/update", Controller.UpdateVisualMap)
 		mapRoute.GET("/list", Controller.ListVisualMap)

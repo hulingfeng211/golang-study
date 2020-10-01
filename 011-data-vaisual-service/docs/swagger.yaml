@@ -1,5 +1,431 @@
+definitions:
+  Model.R:
+    properties:
+      code:
+        type: integer
+      data:
+        type: object
+      msg:
+        type: string
+      success:
+        type: boolean
+    type: object
+  Model.Visual:
+    properties:
+      backgroundUrl:
+        type: string
+      category:
+        type: string
+      createdAt:
+        type: string
+      deletedAt:
+        type: string
+      id:
+        type: integer
+      password:
+        type: string
+      title:
+        type: string
+      updatedAt:
+        type: string
+    type: object
+  Model.VisualCategory:
+    properties:
+      categoryKey:
+        type: string
+      categoryValue:
+        type: string
+      createdAt:
+        type: string
+      deletedAt:
+        type: string
+      id:
+        type: integer
+      updatedAt:
+        type: string
+    type: object
+  Model.VisualMap:
+    properties:
+      createdAt:
+        type: string
+      data:
+        type: string
+      deletedAt:
+        type: string
+      id:
+        type: integer
+      name:
+        description: Id uint `json:"id" gorm:"primaryKey" gorm:"autoIncrement"`
+        type: string
+      updatedAt:
+        type: string
+    type: object
 info:
   contact: {}
   license: {}
-paths: {}
+paths:
+  /category/detail:
+    get:
+      consumes:
+      - application/json
+      description: 根据分类信息获取分类明细
+      parameters:
+      - description: Some ID
+        in: query
+        name: id
+        required: true
+        type: integer
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/Model.R'
+        "400":
+          description: We need ID!!
+          schema:
+            $ref: '#/definitions/Model.R'
+        "404":
+          description: Can not find ID
+          schema:
+            $ref: '#/definitions/Model.R'
+      summary: 根据分类信息获取分类明细
+      tags:
+      - VisualCategory
+  /category/list:
+    get:
+      consumes:
+      - application/json
+      description: 查找所有的分类列表
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/Model.R'
+        "400":
+          description: We need ID!!
+          schema:
+            $ref: '#/definitions/Model.R'
+        "404":
+          description: Can not find ID
+          schema:
+            $ref: '#/definitions/Model.R'
+      summary: 查找所有的分类列表
+      tags:
+      - VisualCategory
+    post:
+      consumes:
+      - application/json
+      description: 删除分类
+      parameters:
+      - description: ID列表，多个以,分隔
+        in: body
+        name: ids
+        required: true
+        schema:
+          type: string
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/Model.R'
+        "400":
+          description: We need ID!!
+          schema:
+            $ref: '#/definitions/Model.R'
+        "404":
+          description: Can not find ID
+          schema:
+            $ref: '#/definitions/Model.R'
+      summary: 删除分类
+      tags:
+      - VisualCategory
+  /category/save:
+    post:
+      consumes:
+      - application/json
+      description: 创建新的分类
+      parameters:
+      - description: 分类数据
+        in: body
+        name: data
+        required: true
+        schema:
+          $ref: '#/definitions/Model.VisualMap'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/Model.R'
+        "400":
+          description: We need ID!!
+          schema:
+            $ref: '#/definitions/Model.R'
+        "404":
+          description: Can not find ID
+          schema:
+            $ref: '#/definitions/Model.R'
+      summary: 创建新的分类
+      tags:
+      - VisualCategory
+  /category/update:
+    post:
+      consumes:
+      - application/json
+      description: 更新分类
+      parameters:
+      - description: 更新分类
+        in: body
+        name: data
+        required: true
+        schema:
+          $ref: '#/definitions/Model.VisualCategory'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/Model.R'
+        "400":
+          description: We need ID!!
+          schema:
+            $ref: '#/definitions/Model.R'
+        "404":
+          description: Can not find ID
+          schema:
+            $ref: '#/definitions/Model.R'
+      summary: 更新分类
+      tags:
+      - VisualCategory
+  /map/detail:
+    get:
+      consumes:
+      - application/json
+      description: 通过地图编号获取地图数据明细
+      parameters:
+      - description: Some ID
+        in: query
+        name: id
+        required: true
+        type: integer
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/Model.R'
+        "400":
+          description: We need ID!!
+          schema:
+            $ref: '#/definitions/Model.R'
+        "404":
+          description: Can not find ID
+          schema:
+            $ref: '#/definitions/Model.R'
+      summary: 获取地图明细数据
+      tags:
+      - VisualMap
+  /map/list:
+    get:
+      consumes:
+      - application/json
+      description: 查找所有的地图列表
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/Model.R'
+        "400":
+          description: We need ID!!
+          schema:
+            $ref: '#/definitions/Model.R'
+        "404":
+          description: Can not find ID
+          schema:
+            $ref: '#/definitions/Model.R'
+      summary: 查找所有的地图列表
+      tags:
+      - VisualMap
+    post:
+      consumes:
+      - application/json
+      description: 删除地图
+      parameters:
+      - description: ID列表，多个以,分隔
+        in: body
+        name: ids
+        required: true
+        schema:
+          type: string
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/Model.R'
+        "400":
+          description: We need ID!!
+          schema:
+            $ref: '#/definitions/Model.R'
+        "404":
+          description: Can not find ID
+          schema:
+            $ref: '#/definitions/Model.R'
+      summary: 删除地图
+      tags:
+      - VisualMap
+  /map/save:
+    post:
+      consumes:
+      - application/json
+      description: 通过地图编号获取地图数据明细
+      parameters:
+      - description: 可视化地图数据
+        in: body
+        name: data
+        required: true
+        schema:
+          $ref: '#/definitions/Model.VisualMap'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/Model.R'
+        "400":
+          description: We need ID!!
+          schema:
+            $ref: '#/definitions/Model.R'
+        "404":
+          description: Can not find ID
+          schema:
+            $ref: '#/definitions/Model.R'
+      summary: 创建可视化地图
+      tags:
+      - VisualMap
+  /map/update:
+    post:
+      consumes:
+      - application/json
+      description: 更新地图数据
+      parameters:
+      - description: 可视化地图数据
+        in: body
+        name: data
+        required: true
+        schema:
+          $ref: '#/definitions/Model.VisualMap'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/Model.R'
+        "400":
+          description: We need ID!!
+          schema:
+            $ref: '#/definitions/Model.R'
+        "404":
+          description: Can not find ID
+          schema:
+            $ref: '#/definitions/Model.R'
+      summary: 更新地图数据
+      tags:
+      - VisualMap
+  /visual/list:
+    get:
+      consumes:
+      - application/json
+      description: 查找所有看板
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/Model.R'
+        "400":
+          description: We need ID!!
+          schema:
+            $ref: '#/definitions/Model.R'
+        "404":
+          description: Can not find ID
+          schema:
+            $ref: '#/definitions/Model.R'
+      summary: 查找所有看板
+      tags:
+      - Dashboard
+  /visual/put-file:
+    post:
+      consumes:
+      - multipart/form-data
+      description: 上传封面
+      parameters:
+      - description: this is a test file
+        in: formData
+        name: file
+        required: true
+        type: file
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/Model.R'
+        "400":
+          description: We need ID!!
+          schema:
+            $ref: '#/definitions/Model.R'
+        "404":
+          description: Can not find ID
+          schema:
+            $ref: '#/definitions/Model.R'
+      summary: 上传封面
+      tags:
+      - Dashboard
+  /visual/save:
+    post:
+      consumes:
+      - application/json
+      description: 创建看板
+      parameters:
+      - description: 看板
+        in: body
+        name: data
+        required: true
+        schema:
+          $ref: '#/definitions/Model.Visual'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/Model.R'
+        "400":
+          description: We need ID!!
+          schema:
+            $ref: '#/definitions/Model.R'
+        "404":
+          description: Can not find ID
+          schema:
+            $ref: '#/definitions/Model.R'
+      summary: 创建看板
+      tags:
+      - Dashboard
 swagger: "2.0"

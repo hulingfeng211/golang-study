@@ -1,4 +1,4 @@
-package main
+package room
 
 import (
 	"github.com/gin-gonic/gin"

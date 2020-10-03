@@ -28,6 +28,8 @@ func ListVisual(c *gin.Context) {
 	data["total"] = count
 	data["size"] = 100
 	data["pages"] = 1
+	result := make(map[string]interface{})
+	result["data"] = data
 	c.JSON(http.StatusOK, Model.R{Data: data})
 }
 
@@ -75,4 +77,52 @@ func PutFileWithVisual(c *gin.Context) {
 	data := make(map[string]interface{})
 	data["link"] = url
 	c.JSON(http.StatusOK, Model.R{Data: data})
+}
+
+// @Summary 更新看板
+// @Description 更新看板
+// @Tags Visual
+// @Accept  json
+// @Produce  json
+// @Param    data    body    Model.Visual     true        "更新看板"
+// @Success 200 {object} Model.R
+// @Failure 400 {object}  Model.R "We need ID!!"
+// @Failure 404 {object}  Model.R "Can not find ID"
+// @Router /category/update [post]
+func UpdateVisual(c *gin.Context) {
+	var visual Model.Visual
+	//Database.DB.Where("1=1").Find(&Model.VisualCategory{}).Count(&count)
+	//data:=make(map[string]interface{})
+	if err := c.ShouldBind(&visual); err == nil {
+		//c.String(http.StatusOK, `the body should be formA`)
+		// 因为现在 c.Request.Body 是 EOF，所以这里会报错。
+		Database.DB.Updates(visual)
+		c.JSON(http.StatusOK, Model.R{Data: "OK"})
+	}
+
+}
+
+// @Summary 获取看板数据
+// @Description 获取看板数据
+// @Tags Visual
+// @Accept  json
+// @Produce  json
+// @Param   id     query    int     true        "Some ID"
+// @Success 200 {object} Model.R
+// @Failure 400 {object}  Model.R "We need ID!!"
+// @Failure 404 {object}  Model.R "Can not find ID"
+// @Router /category/detail [get]
+func VisualDetail(c *gin.Context) {
+	//var count int64
+	var visual Model.Visual
+	//Database.DB.Where("1=1").Find(&Model.VisualCategory{}).Count(&count)
+	//data:=make(map[string]interface{})
+	if cid, ok := c.GetQuery("id"); ok {
+		Database.DB.Where("id=?", cid).Find(&visual).Limit(1)
+		result := make(map[string]interface{})
+		result["visual"] = visual
+		c.JSON(http.StatusOK, Model.R{Data: result})
+	} else {
+		c.JSON(http.StatusOK, Model.R{Data: visual})
+	}
 }

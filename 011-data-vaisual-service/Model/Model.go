@@ -32,10 +32,12 @@ type VisualMap struct {
 
 type Visual struct {
 	BaseModel
-	Title         string `json:"title"`
-	BackgroundUrl string `json:"backgroundUrl"`
-	Category      string `json:"category"`
-	Password      string `json:"password"`
+	Title         string       `json:"title"`
+	BackgroundUrl string       `json:"backgroundUrl"`
+	Category      string       `json:"category"`
+	Password      string       `json:"password"`
+	Status        string       `json:"status"`
+	Config        VisualConfig `json:"config" `
 }
 
 type VisualCategory struct {
@@ -46,7 +48,7 @@ type VisualCategory struct {
 
 type VisualConfig struct {
 	BaseModel
-	VisualId  uint64 `json:"visualId"`
-	Detail    string `json:"detail"`
-	Component string `json:"component" gorm:"size:2000"`
+	VisualId  uint   `json:"visualId"`
+	Detail    string `json:"detail" gorm:"size:2000"`
+	Component string `json:"component" gorm:"size:5000"`
 }

@@ -49,6 +49,8 @@ func routeGroup(router *gin.Engine) {
 		//mapCategory.PUT("/save",Controller.CreateVisualMap)
 		visualRouteGroup.GET("/list", Controller.ListVisual)
 		visualRouteGroup.POST("/save", Controller.SaveVisual)
+		visualRouteGroup.GET("/detail", Controller.VisualDetail)
+		visualRouteGroup.POST("/update", Controller.UpdateVisual)
 		visualRouteGroup.POST("/put-file", Controller.PutFileWithVisual)
 		//mapRoute.GET("/detail",mapDetailHandler)
 		//mapRoute.GET("/detail",mapDetailHandler)

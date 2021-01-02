@@ -9,11 +9,12 @@ import (
 
 func main() {
 	fmt.Println("hello")
-	resp, err := http.Get("http://169.24.2.82:8000/")
+	resp, err := http.Get("https://www.baidu.com/")
 	check(err)
 	body, err := ioutil.ReadAll(resp.Body)
 	check(err)
 	fmt.Println(len(body))
+
 }
 func check(err error) {
 	if err != nil {

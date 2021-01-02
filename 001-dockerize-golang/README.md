@@ -17,6 +17,8 @@ docker build -t example-scratch -f Dockerfile.multistage  .
 ```
 docker build --rm -it example-scratch
 ```
+
+
 - 编译文件&打包镜像（ 模式2）
 >通过本地编译，然后copy编译后的文件到image中
 
@@ -36,4 +38,19 @@ docker build -t example-scratch -f Dockerfile.scratch  .
 docker build --rm -it example-scratch
 ```
  
+
+ - docker国内镜像加速
+
+创建或修改 /etc/docker/daemon.json 文件，修改为如下形式
+
+
+ ```
+{
+  "registry-mirrors": [
+    "https://registry.docker-cn.com",
+    "http://hub-mirror.c.163.com",
+    "https://docker.mirrors.ustc.edu.cn"
+  ]
+}
+ ```
 

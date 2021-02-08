@@ -3,3 +3,5 @@
 *.[oa]
 001-dockerize-golang/main
 ./001-dockerize-golang/main
+
+/012-scan-qrcode-demo/vendor/

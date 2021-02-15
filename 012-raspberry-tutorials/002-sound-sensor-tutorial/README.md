@@ -8,3 +8,7 @@
 
 **参见main2.go**
 
+编译
+```golang
+env GOOS=linux GOARCH=arm GOARM=7 go build -o sound-tutorial
+```

@@ -71,7 +71,7 @@ func readData(soundPin rpio.Pin, c chan uint8) {
 		if res == rpio.Low {
 			log.Printf("state==%d", res)
 			c <- 1
-			time.Sleep(time.Duration(10) * time.Millisecond)
+			time.Sleep(time.Duration(100) * time.Millisecond)
 		}
 
 	}

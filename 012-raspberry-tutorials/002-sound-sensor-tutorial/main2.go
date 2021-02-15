@@ -24,6 +24,10 @@ func main() {
 	soundPin.Input() // Input mode
 	//soundPin2 := rpio.Pin(5)
 	//soundPin2.Input() // Input mode
+	lightPin:=rpio.Pin(24)
+	lightPin.Output()
+	go writeData(lightPin)
+
 	go readData(soundPin)
 	//	go readData(soundPin2)
 	defer rpio.Close()
@@ -39,6 +43,11 @@ func main() {
 		}
 	}
 
+}
+func writeData(lightPin rpio.Pin) {
+	log.Print("write data 24")
+	lightPin.Write(rpio.High)
+	log.Print("write data 24 end")
 }
 
 func readData(soundPin rpio.Pin) {

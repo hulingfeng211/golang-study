@@ -1,4 +1,4 @@
-module github.com/hulingfeng211/golang-study/012-scan-qrcode-demo
+module github.com/hulingfeng211/golang-study/012-raspberry-tutorials/012-scan-qrcode-tutorial
 
 go 1.15
 

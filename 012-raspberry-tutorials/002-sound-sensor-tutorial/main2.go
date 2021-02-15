@@ -5,6 +5,8 @@ import (
 	"github.com/stianeikeland/go-rpio"
 	"log"
 	"os"
+	"time"
+
 	//"github.com/stianeikeland/go-rpio"
 	"os/signal"
 	"syscall"
@@ -43,8 +45,9 @@ func readData(soundPin rpio.Pin) {
 	log.Print(string(soundPin))
 	for {
 		res := soundPin.Read()
-		if res != rpio.Low {
+		if res == rpio.Low {
 			log.Printf("state==%d", res)
+			time.Sleep(time.Duration(10) * time.Millisecond)
 		}
 
 	}

@@ -20,7 +20,10 @@ func main() {
 	}
 	soundPin := rpio.Pin(4)
 	soundPin.Input() // Input mode
+	//soundPin2 := rpio.Pin(5)
+	//soundPin2.Input() // Input mode
 	go readData(soundPin)
+//	go readData(soundPin2)
 	defer rpio.Close()
 
 	signal.Notify(c, os.Interrupt, syscall.SIGTERM)
@@ -37,9 +40,10 @@ func main() {
 }
 
 func readData(soundPin rpio.Pin) {
-
+	log.Print(string(soundPin))
 	for {
 		res := soundPin.Read()
-		log.Print(string(res))
+		log.Printf("state==%d",res)
+
 	}
 }

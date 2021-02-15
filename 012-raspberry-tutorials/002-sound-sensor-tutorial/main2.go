@@ -66,11 +66,24 @@ func turnOffLight(lightPin rpio.Pin) {
 
 func readData(soundPin rpio.Pin, c chan uint8) {
 	log.Print(string(soundPin))
+	var preTime, currentTime int64
 	for {
+
+		currentTime = time.Now().UnixNano()
+		//currentTime=preTime
+
 		res := soundPin.Read()
+
 		if res == rpio.Low {
 			log.Printf("state==%d", res)
-			c <- 1
+			if preTime == 0 {
+				//c <- 1
+				preTime = currentTime
+			}
+			if (currentTime-preTime)/1e6 < 200 {
+				c <- 1
+				preTime = currentTime
+			}
 			time.Sleep(time.Duration(10) * time.Millisecond)
 		}
 

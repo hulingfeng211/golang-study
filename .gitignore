@@ -4,5 +4,5 @@
 001-dockerize-golang/main
 ./001-dockerize-golang/main
 
-./012-raspberry-tutorial/001-scan-qrcode-demo/vendor/
-/012-raspberry-tutorial/001-scan-qrcode-demo/vendor/
+
+/012-raspberry-tutorials/001-scan-qrcode-toturial/vendor/

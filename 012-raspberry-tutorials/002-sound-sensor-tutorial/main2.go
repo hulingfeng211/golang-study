@@ -2,10 +2,11 @@ package main
 
 import (
 	"fmt"
-	"github.com/stianeikeland/go-rpio"
 	"log"
 	"os"
 	"time"
+
+	"github.com/stianeikeland/go-rpio"
 
 	//"github.com/stianeikeland/go-rpio"
 	"os/signal"
@@ -27,21 +28,25 @@ func main() {
 	soundPin.Input() // Input mode
 	//soundPin2 := rpio.Pin(5)
 	//soundPin2.Input() // Input mode
+
 	lightPin := rpio.Pin(24)
 	lightPin.Output()
+	lightPin2 := rpio.Pin(25)
+	lightPin2.Output()
+	lightPin2.Write(rpio.Low)
+
 	//go writeData(lightPin)
 	go turnOffLight(lightPin)
 
 	go readData(soundPin, clapChan)
 	//	go readData(soundPin2)
 	defer rpio.Close()
-
 	signal.Notify(c, os.Interrupt, syscall.SIGTERM)
 
 	for {
 		select {
-		case <-clapChan:
-			if lightIsOpen {
+		case sig := <-clapChan:
+			if sig == 2 {
 				go turnOffLight(lightPin)
 				lightIsOpen = !lightIsOpen
 			} else {
@@ -57,9 +62,11 @@ func main() {
 	}
 
 }
+
 func turnOnLight(lightPin rpio.Pin) {
 	lightPin.Write(rpio.High)
 }
+
 func turnOffLight(lightPin rpio.Pin) {
 	lightPin.Write(rpio.Low)
 }
@@ -73,19 +80,21 @@ func readData(soundPin rpio.Pin, c chan uint8) {
 		//currentTime=preTime
 
 		res := soundPin.Read()
-
 		if res == rpio.Low {
 			log.Printf("state==%d", res)
 			if preTime == 0 {
 				//c <- 1
 				preTime = currentTime
 			}
-			if (currentTime-preTime)/1e6 < 200 {
+			if (currentTime-preTime)/1e6 < 500 {
+				c <- 2
+				preTime = currentTime
+			} else {
 				c <- 1
 				preTime = currentTime
-			}
-			time.Sleep(time.Duration(10) * time.Millisecond)
-		}
 
+			}
+			time.Sleep(time.Duration(100) * time.Millisecond)
+		}
 	}
 }

@@ -1,0 +1,13 @@
+POST http://emobile.chinasws.com:9000/ssologin/getToken
+Content-Type: application/x-www-form-urlencoded
+
+appid=app2&loginid=SL100308
+
+###
+
+POST http://emobile.chinasws.com:9000/ssologin/checkToken
+Content-Type: application/x-www-form-urlencoded
+
+token=1353B101DE514AAC7CB9A314858DDFC76A94BD93848CB31398B1291D9B6FD275D6308ACA73B934A51D471F73A58EBFAF29CDD69D59E371D74F43F51574DF21B107A9FA768A5C4360043673F7C18B7498
+
+###

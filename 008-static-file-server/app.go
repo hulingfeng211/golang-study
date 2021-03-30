@@ -13,7 +13,8 @@ dirName:静态资源的文件路径
 */
 func runFileServer(port, dirName string) {
 	log.Printf("will start server  on %s and Directory %s", port, dirName)
-	http.ListenAndServe(":"+port, http.FileServer(http.Dir(dirName)))
+	log.Fatal(http.ListenAndServe(":"+port, http.FileServer(http.Dir(dirName))))
+	log.Print("exit")
 }
 
 func main() {

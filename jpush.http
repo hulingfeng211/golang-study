@@ -1,0 +1,31 @@
+#user_id:"1290196675190763529"
+
+#appkey:ab29c2192f2fa9a4b267b70b
+#secret:b8ce9d5a7a6c9e3223bb6bf5
+#base64("{appkey}:{secret}")
+### 获取设备信息
+GET https://device.jpush.cn/v3/devices/1a0018970a0b856857d
+Authorization: Basic YWIyOWMyMTkyZjJmYTlhNGIyNjdiNzBiOmI4Y2U5ZDVhN2E2YzllMzIyM2JiNmJmNQ==
+
+### 别名查询,别名是用户编号，通过别名查询到用户对应的设备
+GET https://device.jpush.cn/v3/aliases/1290196675190763529
+Authorization: Basic YWIyOWMyMTkyZjJmYTlhNGIyNjdiNzBiOmI4Y2U5ZDVhN2E2YzllMzIyM2JiNmJmNQ==
+
+### 解邦用户对应的设备
+POST  https://device.jpush.cn/v3/aliases/1290196675190763529
+Authorization: Basic YWIyOWMyMTkyZjJmYTlhNGIyNjdiNzBiOmI4Y2U5ZDVhN2E2YzllMzIyM2JiNmJmNQ==
+
+{
+  "registration_ids": {"remove":[
+    "18071adc03b764d6c43",
+    "190e35f7e0fd2116d66",
+    "140fe1da9e159f8365b",
+    "170976fa8a3f636777e",
+    "1507bfd3f77b1d2ba5c",
+    "190e35f7e0f9ec7e21e",
+    "190e35f7e0f8ee11e0e",
+    "170976fa8a340da454b",
+    "120c83f7609e91bf722",
+    "120c83f7609acc781bc"
+  ]}
+}
